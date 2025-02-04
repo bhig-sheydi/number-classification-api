@@ -31,14 +31,14 @@ npm install
 node server.js
 ```
 
-The API will run on `http://localhost:3000/` by default.
+The API will run on `https://number-classification-api.vercel.app` by default.
 
 ---
 
 ## 📡 API Endpoints
 
 ### 1️⃣ **Classify a Number**
-#### ➡️ `POST /api/classify`
+#### ➡️ `GET /api/classify-number`
 
 **Request Body (JSON):**
 ```json
@@ -88,8 +88,7 @@ Feel free to fork this repository and contribute! Pull requests are welcome.
 
 ---
 
-## 📜 License
-This project is licensed under the **MIT License**.
+
 
 ---
 
