@@ -1,15 +1,17 @@
 const express = require("express");
-const cors = require("cors");
+const cors = require("cors"); // Import the cors package
 const classifyRoute = require("./routes/classifyRoute");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware with error handling
+// Enable CORS for all routes
 app.use(cors());
+
+// Middleware to parse JSON requests
 app.use(express.json());
 
-// Basic health check route
+// Health check route
 app.get("/", (req, res) => {
   res.status(200).json({ message: "API is running!" });
 });
@@ -19,41 +21,22 @@ app.use("/api", classifyRoute);
 
 // Handle unknown routes
 app.use((req, res) => {
-  res.status(404).json({ 
-    error: "Route not found",
-    details: {
-      requestedUrl: req.originalUrl,
-      method: req.method,
-      timestamp: new Date().toISOString(),
-    },
+  res.status(404).json({
+    error: true,
+    message: "Route not found",
   });
 });
 
-// Global error handler to catch unexpected errors
+// Global error handler
 app.use((err, req, res, next) => {
   console.error("Internal Server Error:", err.message);
-
-  // Determine the status code based on the error type
-  const statusCode = err.statusCode || 500;
-
-  // Detailed error response
-  res.status(statusCode).json({ 
-    error: err.message || "Something went wrong, please try again later.",
-    details: {
-      statusCode: statusCode,
-      stack: process.env.NODE_ENV === "development" ? err.stack : undefined, // Stack trace in development
-      timestamp: new Date().toISOString(),
-      path: req.path,
-      method: req.method,
-    },
+  res.status(500).json({
+    error: true,
+    message: "Something went wrong, please try again later.",
   });
 });
 
-// Start server with error handling
-app.listen(port, (err) => {
-  if (err) {
-    console.error("Server failed to start:", err);
-    process.exit(1); // Exit with failure
-  }
+// Start server
+app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
