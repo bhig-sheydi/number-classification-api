@@ -17,7 +17,7 @@ The **Number Classification API** is a simple Express.js-based API that classifi
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/yourusername/number-classification-api.git
+git clone https://github.com/bhig-sheydi/number-classification-api.git
 cd number-classification-api
 ```
 
