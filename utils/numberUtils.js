@@ -16,6 +16,13 @@ exports.isPerfect = (num) => {
   return sum === num;
 };
 
+// Get number properties (Armstrong, odd/even)
+exports.getProperties = (num) => {
+  let properties = num % 2 === 0 ? ["even"] : ["odd"];
+  if (this.isArmstrong(num)) properties.unshift("armstrong");
+  return properties;
+};
+
 // Check if a number is an Armstrong number
 exports.isArmstrong = (num) => {
   const digits = num.toString().split("").map(Number);
@@ -24,19 +31,7 @@ exports.isArmstrong = (num) => {
   return sum === num;
 };
 
-// Get number properties (Armstrong, odd/even)
-exports.getProperties = (num) => {
-  const properties = [];
-  if (exports.isArmstrong(num)) properties.push("armstrong");
-  if (num % 2 === 0) properties.push("even");
-  else properties.push("odd");
-  return properties;
-};
-
 // Calculate sum of digits
 exports.getDigitSum = (num) => {
-  return num
-    .toString()
-    .split("")
-    .reduce((sum, digit) => sum + parseInt(digit), 0);
+  return num.toString().split("").reduce((sum, digit) => sum + parseInt(digit), 0);
 };
